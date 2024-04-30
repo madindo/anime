@@ -1,12 +1,12 @@
 "use client"
 import React, { useState, useEffect } from 'react'
 import Image from "next/image";
-export default function AnimeDetail({ params: { id } })  {
-
+export default function AnimeDetail({ params }: { params: string })  {
+  const { id: id } = params || {};
   const [anime, setAnime] = useState<any[]>([]);
 
   const fetchData = async () => {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}anime/${id}`)
+    const response = await fetch(`https://api.jikan.moe/v4/anime/${id}`)
     const anime = await response.json();
     setAnime(anime.data)
   }
@@ -18,6 +18,7 @@ export default function AnimeDetail({ params: { id } })  {
   return (
     <>
       <div className="px-4 py-6 max-w-7xl mx-auto space-y-3">
+        <h2>Detail Anime</h2>
         <h3 className="text-color-primary text-2xl">{anime?.title} - {anime?.year}</h3>
         <div className='flex'>
           <Image

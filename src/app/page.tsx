@@ -10,7 +10,7 @@ export default function Home() {
     const [anime, setAnime] = useState<any[]>([]);
 
     const fetchData = async () => {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}anime?page=${page}`)
+      const response = await fetch(`https://api.jikan.moe/v4/anime?page=${page}`)
         const data = await response.json();
         setAnime(data.data)
         setLastpage(data.pagination.last_visible_page)
@@ -22,6 +22,7 @@ export default function Home() {
   return (
     <main>
       <div className="container max-w-screen-xl mx-auto px-4">
+        <h2>Listing Anime</h2>
         <div className="grid sm:grid-cols-3 md:grid-cols-5 grid-cols-2 gap-4">
           <AnimeList anime={anime} />
         </div>
