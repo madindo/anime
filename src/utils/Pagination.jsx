@@ -1,7 +1,6 @@
 import React from 'react'
 
 export default function Pagination({ page, lastPage, setPage }) {
-
     const handleNextPage = () => {
         setPage((prevState) => prevState + 1);
     }

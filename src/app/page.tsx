@@ -1,5 +1,5 @@
 "use client"
-import { useState, useEffect, Component } from 'react'
+import { useState, useEffect } from 'react'
 import AnimeList from "../components/AnimeList"
 import Pagination from "../utils/Pagination"
 
@@ -19,7 +19,6 @@ export default function Home() {
     useEffect(() => {
         fetchData()
     }, [page])
-
   return (
     <main>
       <div className="container max-w-screen-xl mx-auto px-4">
