@@ -10,7 +10,7 @@ export default function Home() {
     const [anime, setAnime] = useState<any[]>([]);
 
     const fetchData = async () => {
-        const response = await fetch(`https://api.jikan.moe/v4/anime?page=${page}`)
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}anime?page=${page}`)
         const data = await response.json();
         setAnime(data.data)
         setLastpage(data.pagination.last_visible_page)
