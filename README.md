@@ -23,6 +23,16 @@ yarn dev
 ```
 This command will start the Next.js development server, and your application will be accessible at http://localhost:3000.
 
+## Using docker
+Before getting started, ensure you have the following installed on your system:
+
+- Docker: Install Docker
+
+```bash
+docker build -t anime .
+docker run -p 3000:3000
+```
+
 ## Project Structure
 The project structure follows the standard conventions of a Next.js application. Here's a brief overview:
 
