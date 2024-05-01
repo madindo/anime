@@ -10,29 +10,29 @@ export default function Home() {
     const [anime, setAnime] = useState<any[]>([]);
     const [isLoading, setIsLoading] = useState(false);
 
-    const fetchData = async () => {
-
-      setIsLoading(true);
-      const response = await fetch(`https://api.jikan.moe/v4/anime?page=${page}`,
-        {
-          cache: 'force-cache',
-          next: {
-            tags: ["listing"]
-          }
-        }
-      )
-
-      if (!response.ok) {
-        throw new Error("Failed to fetch data");
-      }
-      const data = await response.json();
-      setIsLoading(false);
-
-      setAnime(data.data)
-      setLastpage(data.pagination.last_visible_page)
-    }
-
     useEffect(() => {
+      const fetchData = async () => {
+
+        setIsLoading(true);
+        const response = await fetch(`https://api.jikan.moe/v4/anime?page=${page}`,
+          {
+            cache: 'force-cache',
+            next: {
+              tags: ["listing"]
+            }
+          }
+        )
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch data");
+        }
+        const data = await response.json();
+        setIsLoading(false);
+
+        setAnime(data.data)
+        setLastpage(data.pagination.last_visible_page)
+      }
+
         fetchData()
     }, [page])
 

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 import AnimeList from "../../../../components/AnimeList"
 import Pagination from "../../../../utils/Pagination"
 
-export default function Search({ params }: { params: string}) {
+export default function Search({ params }: { params: {search: string } }) {
 
   const { search: search } = params || {};
 
@@ -12,32 +12,33 @@ export default function Search({ params }: { params: string}) {
   const [anime, setAnime] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const fetchData = async () => {
-    const decodedKeyword = decodeURI(search);
 
-    setIsLoading(true);
-    const response = await fetch(`https://api.jikan.moe/v4/anime?q=${decodedKeyword}&page=${page}`,
-      {
-        cache: 'force-cache',
-        next: {
-          tags: ["search"]
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const decodedKeyword = decodeURI(search);
+
+      setIsLoading(true);
+      const response = await fetch(`https://api.jikan.moe/v4/anime?q=${decodedKeyword}&page=${page}`,
+        {
+          cache: 'force-cache',
+          next: {
+            tags: ["search"]
+          }
         }
+      )
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch data");
       }
-    )
+      const data = await response.json();
+      setIsLoading(false);
 
-    if (!response.ok) {
-      throw new Error("Failed to fetch data");
+      setAnime(data.data)
+      setLastpage(data.pagination.last_visible_page)
     }
-    const data = await response.json();
-    setIsLoading(false);
-
-    setAnime(data.data)
-    setLastpage(data.pagination.last_visible_page)
-  }
-
-   useEffect(() => {
-     fetchData()
-   }, [page])
+    fetchData()
+   }, [page, search])
 
    return (
      <main>
