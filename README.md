@@ -42,6 +42,6 @@ The project structure follows the standard conventions of a Next.js application.
 
 - **components/**: Houses reusable React components used throughout your application.
 
-- **lib/**: Includes utility functions, API handlers, or any other logic that doesn't belong to a specific component.
+- **utils/**: Includes utility functions, API handlers, or any other logic that doesn't belong to a specific component.
 
 Feel free to explore and modify these files to fit your project's requirements!
